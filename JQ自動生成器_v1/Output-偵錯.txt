@@ -1,0 +1,10 @@
+﻿JQ自動生成器_v1.exe' (CLR v4.0.30319: DefaultDomain): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: DefaultDomain): 已載入 'C:\Users\jackchen\OneDrive - 進金生能源服務股份有限公司 (1)\桌面\OneDrive - 進金生能源服務股份有限公司\04程式碼\MOXA JQ自動產出\JQ自動生成器_v1\JQ自動生成器_v1\bin\Debug\JQ自動生成器_v1.exe'。已載入符號。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll'。已略過載入符號。模組已最佳化，並已啟用 [Just My Code] 偵錯工具選項。
+JQ自動生成器_v1.exe' (CLR v4.0.30319: JQ自動生成器_v1.exe): 已載入 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\mscorlib.resources\v4.0_4.0.0.0_zh-Hant_b77a5c561934e089\mscorlib.resources.dll'。建置的模組沒有符號。
+'[10928] JQ自動生成器_v1.exe' 程式以返回碼 0 (0x0) 結束。
