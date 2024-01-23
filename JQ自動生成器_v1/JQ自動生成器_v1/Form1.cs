@@ -87,7 +87,7 @@ namespace JQ自動生成器_v1
             string[] invLabel = new string[50];  // INV 告警事件表
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath = Path.Combine(desktopPath, "JQ_Format.txt");
-            string[] strings = new string[100];
+            string[] strings = new string[120];
             string[] indexes = new string[INV_QUANTITY];
             string[] indexes2 = new string[PV_QUANTITY];
             string[] indexes3 = new string[IRR_QUANTITY];
@@ -184,23 +184,22 @@ namespace JQ自動生成器_v1
             strings[12] = "def GenerateABDivisor($source_prefix; $source_indexes; $a; $b; $divisor; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then(if (( $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\") != 0) then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" * $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\" / $divisor | FormatFloat else 0 end)else 0 end);\n";
             strings[13] = "def GenerateACrossor($source_prefix; $source_indexes; $a; $crossor; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" * $crossor | FormatFloat else 0 end);\n";
             strings[14] = "def GeneratetempSourceByIndex($source; $tag_prefix; $tag_indexes; $data):$tag_indexes | map(if $data.\"\\($source)\".status == 0 then $data.\"\\($source)\".\"\\($tag_prefix)\" | FormatFloat else 0 end);\n";
-            // strings[15] = "def GenerateOnlyOneTempIndex($source_prefix; $source_indexes; $tag_prefix; $tag_indexes; $data):$source_indexes | map(GeneratetempSourceByIndex($source_prefix+(.|tostring); $tag_prefix; $tag_indexes; $data));\n";
-            strings[16] = "def GenerateABCrossor($source; $tag_prefix_a; $tag_prefix_b; $tag_indexes; $data):(($tag_indexes | map( if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\") != null then $data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\" * $data.\"\\($source)\".\"\\($tag_prefix_b + (.tostring))\"| FormatFloat else \" - 1\" end )else 0 end)) | map(select(. != \" - 1\")));\n";
-            strings[17] = "def GenerateCalculateABCrossorByIndex($source_prefix; $source_indexes; $tag_a; $tag_b;$tag_indexes; $data):$source_indexes | map(GenerateABCrossor($source_prefix+(.|tostring); $tag_a; $tag_b; $tag_indexes; $data));\n";
-            // strings[18] = "def GenerateABCrossoranddivide1000($source; $tag_prefix_a; $tag_prefix_b; $tag_indexes; $data):(($tag_indexes | map( if $data.\"\\($source)\".status == 0 then ( if ($data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\") and ($data.\"\\($source)\".\"\\($tag_prefix_b + (.| tostring))\") != null then $data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\" * $data.\"\\($source)\".\"\\($tag_prefix_b + (.tostring))\" / 1000 | FormatFloat else($data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\")end )else 0 end)));\n";
-            strings[18] = "def GenerateABCrossoranddivide1000($source; $tag_prefix_a; $tag_prefix_b; $tag_indexes; $data):(($tag_indexes | map(if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\") and ($data.\"\\($source)\".\"\\($tag_prefix_b+(.|tostring))\") != null then $data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\" * $data.\"\\($source)\".\"\\($tag_prefix_b+(.|tostring))\" / 1000 | FormatFloat else($data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\")end )else 0 end)));\n";
-            strings[19] = "def GenerateCalculateABCrossorByIndexanddivide1000($source_prefix; $source_indexes; $tag_a;$tag_b; $tag_indexes; $data):$source_indexes | map(GenerateABCrossoranddivide1000($source_prefix+(.|tostring); $tag_a; $tag_b; $tag_indexes;$data));\n";
-            strings[20] = "def GenerateAMinusB($source_prefix; $source_indexes; $a; $b; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then(if (( $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix + (.tostring))\".\"\\($b)\") != 0) then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" - $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\"| FormatFloat else 0 end)else 0 end);\n";
-            strings[21] = "def GenerateADivideB($source_prefix; $source_indexes; $a; $b; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then (if (( $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\") != 0) then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" / $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\" | FormatFloat else 0 end)else 0 end);\n";
-            strings[22] = "def GenerateInsulationA($source_prefix; $source_indexes; $a; $data): $source_indexes | map( if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then( if ($data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) > 0 then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" | IRRFormatFloat else 0 end )else 0 end);\n";
-            strings[23] = "def GenerateEvent($source_prefix; $source_indexes; $tag_indexes; $data):$source_indexes | map(GenerateEventB($source_prefix+(.|tostring); $tag_indexes; $data));\n";
-            strings[24] = "def GenerateCrossor($source; $tag_prefix; $crossor; $data):(if $data.\"\\($source)\".status == 0 then(if ($data.\"\\($source)\".\"\\($tag_prefix)\" ) != null then($data.\"\\($source)\".\"\\($tag_prefix)\")*$crossor | FormatFloat else($data.\"\\($source)\".\"\\($tag_prefix)\")end)else 0 end);\n";
-            strings[25] = "def GenerateEventT($source_prefix; $source_indexes; $tag_indexes; $data):$source_indexes | map(EventOneArray($source_prefix+(.|tostring); $tag_indexes; $data));\n";
-            strings[26] = "def GenerateACrosserSF($source_prefix; $source_indexes; $a; $b; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then ( if (( $data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") >= 0) then (($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\" ))) | FormatFloat else 0 end ) else 0 end );\n";
-            strings[27] = "def GeneratePrimeVoltdcp($source_prefix; $source_indexes; $a; $b; $c; $d; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then (($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($d)\")) | FormatFloat else 0 end );\n";
-            strings[28] = "def GeneratePrimeVoltfreq($source_prefix; $source_indexes; $a; $b; $c; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then ((($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))/3 ) | FormatFloat else 0 end );\n";
-            strings[29] = "def GenerateConstSourceByIndexCrosserSF($source; $tag_prefix; $tag_indexes; $a; $data):(($tag_indexes | map( if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\") != null then ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\")*pow(10;($data.\"\\($source)\".\"\\($a)\"))| FormatFloat else ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\") end )else 0 end)));\n";
-            strings[30] = "def GenerateByIndexCrosserSF($source_prefix; $source_indexes; $tag_prefix; $tag_indexes; $a; $data):$source_indexes | map( GenerateConstSourceByIndexCrosserSF($source_prefix+(.|tostring); $tag_prefix; $tag_indexes; $a; $data));\n";
+            strings[15] = "def GenerateABCrossor($source; $tag_prefix_a; $tag_prefix_b; $tag_indexes; $data):(($tag_indexes | map( if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\") != null then $data.\"\\($source)\".\"\\($tag_prefix_a + (.| tostring))\" * $data.\"\\($source)\".\"\\($tag_prefix_b + (.tostring))\"| FormatFloat else \" - 1\" end )else 0 end)) | map(select(. != \" - 1\")));\n";
+            strings[16] = "def GenerateCalculateABCrossorByIndex($source_prefix; $source_indexes; $tag_a; $tag_b;$tag_indexes; $data):$source_indexes | map(GenerateABCrossor($source_prefix+(.|tostring); $tag_a; $tag_b; $tag_indexes; $data));\n";            
+            strings[17] = "def GenerateABCrossoranddivide1000($source; $tag_prefix_a; $tag_prefix_b; $tag_indexes; $data):(($tag_indexes | map(if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\") and ($data.\"\\($source)\".\"\\($tag_prefix_b+(.|tostring))\") != null then $data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\" * $data.\"\\($source)\".\"\\($tag_prefix_b+(.|tostring))\" / 1000 | FormatFloat else($data.\"\\($source)\".\"\\($tag_prefix_a+(.|tostring))\")end )else 0 end)));\n";
+            strings[18] = "def GenerateCalculateABCrossorByIndexanddivide1000($source_prefix; $source_indexes; $tag_a;$tag_b; $tag_indexes; $data):$source_indexes | map(GenerateABCrossoranddivide1000($source_prefix+(.|tostring); $tag_a; $tag_b; $tag_indexes;$data));\n";
+            strings[19] = "def GenerateAMinusB($source_prefix; $source_indexes; $a; $b; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then(if (( $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix + (.tostring))\".\"\\($b)\") != 0) then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" - $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\"| FormatFloat else 0 end)else 0 end);\n";
+            strings[20] = "def GenerateADivideB($source_prefix; $source_indexes; $a; $b; $data):$source_indexes | map(if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then (if (( $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\") != 0) then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" / $data.\"\\($source_prefix + (.| tostring))\".\"\\($b)\" | FormatFloat else 0 end)else 0 end);\n";
+            strings[21] = "def GenerateInsulationA($source_prefix; $source_indexes; $a; $data): $source_indexes | map( if $data.\"\\($source_prefix + (.| tostring))\".status == 0 then( if ($data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" ) > 0 then $data.\"\\($source_prefix + (.| tostring))\".\"\\($a)\" | IRRFormatFloat else 0 end )else 0 end);\n";
+            strings[22] = "def GenerateEvent($source_prefix; $source_indexes; $tag_indexes; $data):$source_indexes | map(GenerateEventB($source_prefix+(.|tostring); $tag_indexes; $data));\n";
+            strings[23] = "def GenerateCrossor($source; $tag_prefix; $crossor; $data):(if $data.\"\\($source)\".status == 0 then(if ($data.\"\\($source)\".\"\\($tag_prefix)\" ) != null then($data.\"\\($source)\".\"\\($tag_prefix)\")*$crossor | FormatFloat else($data.\"\\($source)\".\"\\($tag_prefix)\")end)else 0 end);\n";
+            strings[24] = "def GenerateEventT($source_prefix; $source_indexes; $tag_indexes; $data):$source_indexes | map(EventOneArray($source_prefix+(.|tostring); $tag_indexes; $data));\n";
+            strings[25] = "def GenerateACrosserSF($source_prefix; $source_indexes; $a; $b; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then ( if (( $data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\" ) != 0) then (($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\" ))) | FormatFloat else 0 end ) else 0 end );\n";
+            strings[26] = "def GeneratePrimeVoltdcp($source_prefix; $source_indexes; $a; $b; $c; $d; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then (($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($d)\")) | FormatFloat else 0 end );\n";
+            strings[27] = "def GeneratePrimeVoltfreq($source_prefix; $source_indexes; $a; $b; $c; $data): $source_indexes | map( if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then ((($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") + ($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))/3 ) | FormatFloat else 0 end );\n";
+            strings[28] = "def GenerateConstSourceByIndexCrosserSF($source; $tag_prefix; $tag_indexes; $a; $data):(($tag_indexes | map( if $data.\"\\($source)\".status == 0 then (if ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\") != null then ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\")*pow(10;($data.\"\\($source)\".\"\\($a)\"))| FormatFloat else ($data.\"\\($source)\".\"\\($tag_prefix+(.|tostring))\") end )else 0 end)));\n";
+            strings[29] = "def GenerateByIndexCrosserSF($source_prefix; $source_indexes; $tag_prefix; $tag_indexes; $a; $data):$source_indexes | map( GenerateConstSourceByIndexCrosserSF($source_prefix+(.|tostring); $tag_prefix; $tag_indexes; $a; $data));\n";
+            strings[30] = "def GenerateACrosserBCrosserSF($source_prefix; $source_indexes; $a; $b; $c; $d; $data):$source_indexes | map(if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then(if (( $data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") != 0)then(($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))) * (($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($d)\")))/1000 | FormatFloat else 0 end)else 0 end);\n";
             strings[31] = "def GenerateADivideBCrosserSF($source_prefix; $source_indexes; $a; $b; $c; $d; $data):$source_indexes | map(if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then (if (( $data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") != 0) then (($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))) / (($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($d)\"))) | FormatFloat else 0 end)else 0 end);\n";
             strings[32] = "def GenerateArrayAMinusBCrosserSF($source_prefix; $source_indexes; $a; $b; $c; $data):$source_indexes | map(if $data.\"\\($source_prefix+(.|tostring))\".status == 0 then(if (( $data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\" ) != 0 and ( $data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\") != 0)then(($data.\"\\($source_prefix+(.|tostring))\".\"\\($a)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))) - (($data.\"\\($source_prefix+(.|tostring))\".\"\\($b)\")*pow(10;($data.\"\\($source_prefix+(.|tostring))\".\"\\($c)\"))) | FormatFloat else 0 end)else 0 end);\n";
             // []index定義 
@@ -244,70 +243,79 @@ namespace JQ自動生成器_v1
             strings[66] = ",\n Insulation: GenerateA(\"inv_\"; .inverterIndexes; \"Insulation\"; .data)";
             strings[68] = ",\n E_today: GenerateA(\"inv_\"; .inverterIndexes; \"E_today\"; .data)";
             strings[69] = ",\n capacity: (.capacityIndexes)";
-            if (comboBox8.Text == "無") strings[70] = ",\n IRR: [null]";
-            else strings[70] = ",\n IRR: GenerateIRRArray(\"IRR_\"; .iRRIndexes; \"IRR\"; .data)";
-            strings[71] = ",\n PVTemp: Generate(\"PV_TEMP\"; \"temp\"; .data)";
-            strings[72] = ",\n ENVTemp: Generate(\"ENV_TEMP\"; \"temp\"; .data)";
+            strings[70] = ",\n power_r: GenerateABCrossor(\"inv_\"; \"Vrs\"; \"Rc\"; .inverterIndexes; .data)";
+            strings[71] = ",\n power_s: GenerateABCrossor(\"inv_\"; \"Vst\"; \"Sc\"; .inverterIndexes; .data)";
+            strings[72] = ",\n power_t: GenerateABCrossor(\"inv_\"; \"Vrt\"; \"Tc\"; .inverterIndexes; .data)";
+            if (comboBox8.Text == "無") strings[80] = ",\n IRR: [null]";
+            else strings[80] = ",\n IRR: GenerateIRRArray(\"IRR_\"; .iRRIndexes; \"IRR\"; .data)";
+            // 日照計
+            if (checkBox18.Checked == true) strings[81] = ",\n PVTemp: Generate(\"PV_TEMP\"; \"temp\"; .data)";
+            if (checkBox17.Checked == true) strings[82] = ",\n ENVTemp: Generate(\"ENV_TEMP\"; \"temp\"; .data)";
             // 風速計
-            if (checkBox19.Checked == true) strings[73] = ",\n Anemometer: Generate(\"Anemometer\"; \"Wind_speed\"; .data)";
+            if (checkBox19.Checked == true) strings[83] = ",\n Anemometer: Generate(\"Anemometer\"; \"Wind_speed\"; .data)";
             // 水位計
-            if (checkBox20.Checked == true) strings[74] = ",\n Waterlevel: Generate(\"Waterlevel\"; \"Measurement_output_value\"; .data)";
+            if (checkBox20.Checked == true) strings[84] = ",\n Waterlevel: Generate(\"Waterlevel\"; \"Measurement_output_value\"; .data)";
             // Errormessage{}
-            strings[75] = ",\n ErrorMessage: {";
-            strings[76] = "\n  inv: GenerateINVStatus(\"inv_\"; .inverterIndexes; .data)";
-            if (comboBox8.Text == "無") strings[77] = ",\n  IRR: [null]";
-            else strings[77] = ",\n  IRR: GenerateINVStatus(\"IRR_\"; .iRRIndexes; .data)";
-            strings[78] = ",\n  PVTemp: GenerateStatus(\"PV_TEMP\";.data)";
-            strings[79] = ",\n  ENVtemp: GenerateStatus(\"ENV_TEMP\";.data)";
+            strings[85] = ",\n ErrorMessage: {";
+            strings[86] = "\n  inv: GenerateINVStatus(\"inv_\"; .inverterIndexes; .data)";
+            if (comboBox8.Text == "無") strings[87] = ",\n  IRR: [null]";
+            else strings[87] = ",\n  IRR: GenerateINVStatus(\"IRR_\"; .iRRIndexes; .data)";
+            if (checkBox18.Checked == true) strings[88] = ",\n  PVTemp: GenerateStatus(\"PV_TEMP\";.data)";
+            if (checkBox17.Checked == true) strings[89] = ",\n  ENVtemp: GenerateStatus(\"ENV_TEMP\";.data)";
             if (checkBox19.Checked == true)
             { // 風速計 (ErrorMessage)
-                strings[80] = ",\n  Anemometer: GenerateStatus(\"Anemometer\";.data)";
+                strings[90] = ",\n  Anemometer: GenerateStatus(\"Anemometer\";.data)";
             }
             if (checkBox20.Checked == true)
             { // 水位計 (ErrorMessage)
-                strings[81] = ",\n  Waterlevel: GenerateStatus(\"Waterlevel\";.data)";
+                strings[91] = ",\n  Waterlevel: GenerateStatus(\"Waterlevel\";.data)";
             }
             if (checkBox21.Checked == true)
             { // 低壓電錶 (ErrorMessage)
-                strings[82] = ",\n  LV_Meter: GenerateStatus(\"LV_meter\";.data)";
+                strings[92] = ",\n  LV_Meter: GenerateStatus(\"LV_meter\";.data)";
             }
             if (checkBox22.Checked == true)
             { // 高壓電錶 (ErrorMessage)
-                strings[83] = ",\n  HV_Meter: GenerateStatus(\"HV_meter\";.data)";
+                strings[93] = ",\n  HV_Meter: GenerateStatus(\"HV_meter\";.data)";
             }
-            strings[84] = "\n  }"; // Errormessage end{}
+            strings[94] = "\n  }"; // Errormessage end{}
 
-            strings[85] = ",\n etc:\n {\n"; // etc{}
+            strings[95] = ",\n etc:\n {\n"; // etc{}
             // 低壓電錶(value)
-            if (checkBox21.Checked == true) strings[86] = "\n  \"LV_meter\": {\n   Vln_a: Generate(\"LV_meter\"; \"Vln_a\"; .data),\n   Vln_b: Generate(\"LV_meter\"; \"Vln_b\"; .data),\n   Vln_c: Generate(\"LV_meter\"; \"Vln_c\"; .data),\n   Vll_ab: Generate(\"LV_meter\"; \"Vll_ab\"; .data),\n   Vll_bc: Generate(\"LV_meter\"; \"Vll_bc\"; .data),\n   Vll_ca: Generate(\"LV_meter\"; \"Vll_ca\"; .data),\n   I_a: Generate(\"LV_meter\"; \"I_a\"; .data),\n   I_b: Generate(\"LV_meter\"; \"I_b\"; .data),\n   I_c: Generate(\"LV_meter\"; \"I_c\"; .data),\n   Freq: Generate(\"LV_meter\"; \"freq\"; .data),\n   P: Generate(\"LV_meter\"; \"P\"; .data),\n   kWh: Generate(\"LV_meter\"; \"kWh\"; .data),\n   KVAR_tot: Generate(\"LV_meter\"; \"Q\"; .data),\n   KVA_tot: Generate(\"LV_meter\"; \"S\"; .data)\n   }";
+            if (checkBox21.Checked == true) strings[96] = "\n  \"LV-meter\": {\n   Vln_a: Generate(\"LV_meter\"; \"Vln_a\"; .data),\n   Vln_b: Generate(\"LV_meter\"; \"Vln_b\"; .data),\n   Vln_c: Generate(\"LV_meter\"; \"Vln_c\"; .data),\n   Vll_ab: Generate(\"LV_meter\"; \"Vll_ab\"; .data),\n   Vll_bc: Generate(\"LV_meter\"; \"Vll_bc\"; .data),\n   Vll_ca: Generate(\"LV_meter\"; \"Vll_ca\"; .data),\n   I_a: Generate(\"LV_meter\"; \"I_a\"; .data),\n   I_b: Generate(\"LV_meter\"; \"I_b\"; .data),\n   I_c: Generate(\"LV_meter\"; \"I_c\"; .data),\n   Freq: Generate(\"LV_meter\"; \"freq\"; .data),\n   P: Generate(\"LV_meter\"; \"P\"; .data),\n   kWh: Generate(\"LV_meter\"; \"AC_kWh\"; .data),\n   KVAR_tot: Generate(\"LV_meter\"; \"Q\"; .data),\n   KVA_tot: Generate(\"LV_meter\"; \"S\"; .data)\n   }";
             // 高壓電錶(value)
             if (checkBox22.Checked == true) {
-                if (checkBox21.Checked == true) strings[87] = ",";
-                strings[88] = "\n  \"HV-meter\": {\n   Vln_a: Generate(\"HV_meter\"; \"Vln_a\"; .data),\n   Vln_b: Generate(\"HV_meter\"; \"Vln_b\"; .data),\n   Vln_c: Generate(\"HV_meter\"; \"Vln_c\"; .data),\n   Vll_ab: Generate(\"HV_meter\"; \"Vll_ab\"; .data),\n   Vll_bc: Generate(\"HV_meter\"; \"Vll_bc\"; .data),\n   Vll_ca: Generate(\"HV_meter\"; \"Vll_ca\"; .data),\n   I_a: Generate(\"HV_meter\"; \"I_a\"; .data),\n   I_b: Generate(\"HV_meter\"; \"I_b\"; .data),\n   I_c: Generate(\"HV_meter\"; \"I_c\"; .data),\n   Freq: Generate(\"HV_meter\"; \"freq\"; .data),\n   P: Generate(\"HV_meter\"; \"P\"; .data),\n   kWh: Generate(\"HV_meter\"; \"kWh\"; .data),\n   KVAR_tot: Generate(\"HV_meter\"; \"Q\"; .data),\n   KVA_tot: Generate(\"HV_meter\"; \"S\"; .data)\n   }";
+                if (checkBox21.Checked == true) strings[97] = ",";
+                strings[98] = "\n  \"HV-meter\": {\n   Vln_a: Generate(\"HV_meter\"; \"Vln_a\"; .data),\n   Vln_b: Generate(\"HV_meter\"; \"Vln_b\"; .data),\n   Vln_c: Generate(\"HV_meter\"; \"Vln_c\"; .data),\n   Vll_ab: Generate(\"HV_meter\"; \"Vll_ab\"; .data),\n   Vll_bc: Generate(\"HV_meter\"; \"Vll_bc\"; .data),\n   Vll_ca: Generate(\"HV_meter\"; \"Vll_ca\"; .data),\n   I_a: Generate(\"HV_meter\"; \"I_a\"; .data),\n   I_b: Generate(\"HV_meter\"; \"I_b\"; .data),\n   I_c: Generate(\"HV_meter\"; \"I_c\"; .data),\n   Freq: Generate(\"HV_meter\"; \"freq\"; .data),\n   P: Generate(\"HV_meter\"; \"P\"; .data),\n   kWh: Generate(\"HV_meter\"; \"AC_kWh\"; .data),\n   KVAR_tot: Generate(\"HV_meter\"; \"Q\"; .data),\n   KVA_tot: Generate(\"HV_meter\"; \"S\"; .data)\n   }";
             }
             // DREAMS電錶(value)
             if (checkBox24.Checked == true)
             {
                 if (comboBox9.Text == "低壓電錶")
                 {
-                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[89] = ",";
-                    strings[90] = "\"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"LV_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"LV_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"LV_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"LV_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"LV_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"LV_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"LV_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"LV_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"LV_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"LV_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"LV_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
+                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[99] = ",";
+                    strings[100] = "\n \"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"LV_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"LV_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"LV_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"LV_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"LV_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"LV_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"LV_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"LV_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"LV_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"LV_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"LV_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
                 }
                 else if (comboBox9.Text == "高壓電錶")
                 {
-                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[89] = ",";
-                    strings[90] = "\"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"HV_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"HV_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"HV_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"HV_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"HV_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"HV_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"HV_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"HV_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"HV_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"HV_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"HV_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
+                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[99] = ",";
+                    strings[100] = "\n \"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"HV_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"HV_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"HV_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"HV_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"HV_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"HV_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"HV_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"HV_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"HV_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"HV_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"HV_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
                 }
                 else if (comboBox9.Text == "獨立電錶")
                 {
-                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[89] = ",";
-                    strings[90] = "\"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"DREAMS_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"DREAMS_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"DREAMS_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"DREAMS_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"DREAMS_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"DREAMS_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"DREAMS_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"DREAMS_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"DREAMS_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"DREAMS_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"DREAMS_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
+                    if (checkBox21.Checked == true || checkBox22.Checked == true) strings[99] = ",";
+                    strings[100] = "\n \"DREAMS-meter\": \n{\r\n   DREAMS_name: \"" + DREAMS_NAME + "\",\r\n   currentPhaseA: GenerateCrossor(\"DREAMS_meter\"; \"I_a\"; 10; .data),\r\n   currentPhaseB: GenerateCrossor(\"DREAMS_meter\"; \"I_b\"; 10; .data),\r\n   currentPhaseC: GenerateCrossor(\"DREAMS_meter\"; \"I_c\"; 10; .data),\r\n   currentPhaseN: 0,\r\n   voltagePhaseA: GenerateCrossor(\"DREAMS_meter\"; \"Vll_ab\"; 100; .data),\r\n   voltagePhaseB: GenerateCrossor(\"DREAMS_meter\"; \"Vll_bc\"; 100; .data),\r\n   voltagePhaseC: GenerateCrossor(\"DREAMS_meter\"; \"Vll_ca\"; 100; .data),\r\n   control_result_01_25: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   control_result_26_50: [{\"pf\":0,\"p\":0},{\"pf\":0,\"p\":0}],\r\n   p_sum: GenerateCrossor(\"DREAMS_meter\"; \"P\"; 1000; .data),\r\n   q_sum: GenerateCrossor(\"DREAMS_meter\"; \"Q\"; 1000; .data),\r\n   pf_avg: GenerateCrossor(\"DREAMS_meter\"; \"PF\"; 100; .data),\r\n   frequency: GenerateCrossor(\"DREAMS_meter\"; \"freq\"; 10; .data),\r\n   total_kWh: GenerateCrossor(\"DREAMS_meter\"; \"AC_kWh\"; 1000; .data),\r\n   irradiance: Generate(\"IRR_\"; \"IRR_01\"; .data),\r\n   p_setting:0,\r\n   q_setting:0,\r\n   pf_setting:0,\r\n   vpset_setting:0,\r\n   itemTimestamp: (now-(now%60)| floor),\r\n   timestamp: (now+28800|strftime(\"%Y-%m-%dT%H:%M:%SZ\"))\r\n  }";
                 }
             }
-            strings[95] = "\n  },\n"; // etc end{}
-            strings[96] = " SYSTIME: (now | floor | tostring)\n";
-            strings[97] = " }\n}"; // detail end{} main emd{}
-            strings[98] = "";
+            if (checkBox25.Checked == true)
+            { // smartlogger
+                if (checkBox21.Checked == true || checkBox22.Checked == true || checkBox24.Checked == true) strings[101] = ",\n";
+                strings[102] = "  smartLogger:(.data.smartlogger | if .time >= 0 then (.time*0) else 1 end)";
+            }
+            strings[105] = "\n  },\n"; // etc end{}
+            strings[106] = " SYSTIME: (now | floor | tostring)\n";
+            strings[107] = " }\n}"; // detail end{} main emd{}
+            strings[108] = "";
 
             // SolarEdge 特殊JQ   1.SF計算 2.E_today使用script做計算 (4.solarEdge、6.ABB) *temp Insulation event未修
             if (invJQType == 4) {
@@ -315,13 +323,13 @@ namespace JQ自動生成器_v1
                 strings[48] = ",\n pv_a: GenerateByIndexCrosserSF(\"inv_\"; .inverterIndexes; \"pv_a\"; .PVIndexes; \"pv_a_SF\"; .data)";
                 strings[49] = ",\n pv_p: GenerateByIndexCrosserSF(\"inv_\"; .inverterIndexes; \"pv_p\"; .PVIndexes; \"pv_p_SF\"; .data)";
                 strings[50] = ",\n PF: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"PF\"; \"PF_SF\"; .data)";
-                strings[51] = ",\n Vrn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vrs\"; \"Vrs_SF\"; .data)";
-                strings[52] = ",\n Vsn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vst\"; \"Vst_SF\"; .data)";
-                strings[53] = ",\n Vtn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vrt\"; \"Vrt_SF\"; .data)";
-                strings[54] = ",\n Rc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Rc\"; \"Rc_SF\"; .data)";
-                strings[55] = ",\n Sc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Sc\"; \"Sc_SF\"; .data)";
-                strings[56] = ",\n Tc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Tc\"; \"Tc_SF\"; .data)";
-                // strings[57] = ",\n temp: GenerateByIndex(\"inv_\"; .inverterIndexes; \"temp_\"; .invTempIndexes; .data)";
+                strings[51] = ",\n Vrn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vrs\"; \"voltage_SF\"; .data)";
+                strings[52] = ",\n Vsn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vst\"; \"voltage_SF\"; .data)";
+                strings[53] = ",\n Vtn: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Vrt\"; \"voltage_SF\"; .data)";
+                strings[54] = ",\n Rc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Rc\"; \"current_SF\"; .data)";
+                strings[55] = ",\n Sc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Sc\"; \"current_SF\"; .data)";
+                strings[56] = ",\n Tc: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"Tc\"; \"current_SF\"; .data)";
+                strings[57] = ",\n temp: GenerateByIndexCrosserSF(\"inv_\"; .inverterIndexes; \"temp_\"; .invTempIndexes; \"temp_SF\"; .data)";
                 // strings[58] = ",\n State: GenerateA(\"inv_\"; .inverterIndexes; \"State\"; .data)";
                 strings[59] = ",\n acp: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"acp\"; \"acp_SF\"; .data)";
                 strings[60] = ",\n dcp: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"dcp\"; \"dcp_SF\"; .data)";
@@ -329,6 +337,9 @@ namespace JQ自動生成器_v1
                 strings[62] = ",\n AC_kWh: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"AC_kWh\"; \"AC_kWh_SF\"; .data)";
                 strings[63] = ",\n freq: GenerateACrosserSF(\"inv_\"; .inverterIndexes; \"freq\"; \"freq_SF\"; .data)";
                 strings[68] = ",\n E_today: GenerateArrayAMinusBCrosserSF(\"inv_\"; .inverterIndexes; \"AC_kWh\"; \"AC_kWh_base\"; \"AC_kWh_SF\"; .data)";
+                strings[70] = ",\n power_r:GenerateACrosserBCrosserSF(\"inv_\"; .inverterIndexes; \"Vrs\"; \"Rc\"; \"voltage_SF\"; \"current_SF\"; .data)";
+                strings[71] = ",\n power_s:GenerateACrosserBCrosserSF(\"inv_\"; .inverterIndexes; \"Vst\"; \"Sc\"; \"voltage_SF\"; \"current_SF\"; .data)";
+                strings[72] = ",\n power_t:GenerateACrosserBCrosserSF(\"inv_\"; .inverterIndexes; \"Vrt\"; \"Tc\"; \"voltage_SF\"; \"current_SF\"; .data)";
             }
             if (invJQType == 4 || invJQType == 6) strings[68] = ",\n E_today: GenerateArrayAMinusB(\"inv_\"; .inverterIndexes; \"AC_kwh\"; \"AC_kwh_base\"; .data)";
 
@@ -339,7 +350,7 @@ namespace JQ自動生成器_v1
             }
 
             // 字串串接
-            for (int i = 0; i < 100; i++) text += strings[i]; 
+            for (int i = 0; i < 120; i++) text += strings[i]; 
 
             // 寫檔到桌面
             using (StreamWriter writetext = new StreamWriter(filePath)) writetext.WriteLine(text); 
@@ -366,6 +377,7 @@ namespace JQ自動生成器_v1
                 checkBox20.Enabled = true;
                 checkBox21.Enabled = true;
                 checkBox22.Enabled = true;
+                checkBox25.Enabled = true;
 
             }
             else
@@ -384,6 +396,7 @@ namespace JQ自動生成器_v1
                 checkBox20.Enabled = false;
                 checkBox21.Enabled = false;
                 checkBox22.Enabled = false;
+                checkBox25.Enabled = false;
             }
         }
         private void checkBox24_CheckedChanged(object sender, EventArgs e)
@@ -413,7 +426,7 @@ namespace JQ自動生成器_v1
         }
 
         private void btnINVMode_Click(object sender, EventArgs e) {
-            panelBrand.Top = 93;
+            panelBrand.Top = 105;
             btnINVMode.BackColor = Color.PowderBlue;
             btnJQMode.BackColor = Color.Transparent;
             btnINVList.BackColor = Color.Transparent;
@@ -425,7 +438,7 @@ namespace JQ自動生成器_v1
         }
 
         private void btnJQMode_Click(object sender, EventArgs e) {
-            panelBrand.Top = 133;
+            panelBrand.Top = 145;
             btnINVMode.BackColor = Color.Transparent;
             btnJQMode.BackColor = Color.PowderBlue;
             btnINVList.BackColor = Color.Transparent;
@@ -436,7 +449,7 @@ namespace JQ自動生成器_v1
             //groupBox4.Visible = false;
         }
         private void btnINVList_Click(object sender, EventArgs e) {
-            panelBrand.Top = 173;
+            panelBrand.Top = 185;
             btnINVMode.BackColor = Color.Transparent;
             btnJQMode.BackColor = Color.Transparent;
             btnINVList.BackColor = Color.PowderBlue;
@@ -447,7 +460,7 @@ namespace JQ自動生成器_v1
             //groupBox4.Visible = false;
         }
         private void btnINVPRO_Click(object sender, EventArgs e) {
-            panelBrand.Top = 213;
+            panelBrand.Top = 225;
             btnINVMode.BackColor = Color.Transparent;
             btnJQMode.BackColor = Color.Transparent;
             btnINVList.BackColor = Color.Transparent;
@@ -572,6 +585,10 @@ namespace JQ自動生成器_v1
             // 關閉 Excel 應用程式
             excelApp.Quit();
         }
-        
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     } // class
 }

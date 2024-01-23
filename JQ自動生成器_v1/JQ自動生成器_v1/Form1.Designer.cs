@@ -56,6 +56,7 @@ namespace JQ自動生成器_v1
             this.btnINVMode = new System.Windows.Forms.Button();
             this.panelBrand = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox25 = new System.Windows.Forms.CheckBox();
             this.checkBox24 = new System.Windows.Forms.CheckBox();
             this.checkBox23 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -124,9 +125,9 @@ namespace JQ自動生成器_v1
             this.label3.Font = new System.Drawing.Font("微軟正黑體", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label3.Location = new System.Drawing.Point(3, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 30);
+            this.label3.Size = new System.Drawing.Size(117, 30);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Developer : JackChen\r\nACME-RD  v.1 23.5.11";
+            this.label3.Text = "Developer : JackChen\r\nACME-RD  v.3 24.1.2";
             // 
             // label4
             // 
@@ -403,14 +404,16 @@ namespace JQ自動生成器_v1
             // 
             // panelBrand
             // 
+            this.panelBrand.AutoScroll = true;
             this.panelBrand.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panelBrand.Location = new System.Drawing.Point(7, 93);
+            this.panelBrand.Location = new System.Drawing.Point(7, 105);
             this.panelBrand.Name = "panelBrand";
             this.panelBrand.Size = new System.Drawing.Size(5, 40);
             this.panelBrand.TabIndex = 34;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox25);
             this.groupBox1.Controls.Add(this.checkBox24);
             this.groupBox1.Controls.Add(this.checkBox23);
             this.groupBox1.Controls.Add(this.label8);
@@ -449,6 +452,17 @@ namespace JQ自動生成器_v1
             this.groupBox1.Text = "MOXA JQ Format 自動產生";
             this.groupBox1.Visible = false;
             // 
+            // checkBox25
+            // 
+            this.checkBox25.AutoSize = true;
+            this.checkBox25.Enabled = false;
+            this.checkBox25.Location = new System.Drawing.Point(240, 137);
+            this.checkBox25.Name = "checkBox25";
+            this.checkBox25.Size = new System.Drawing.Size(79, 16);
+            this.checkBox25.TabIndex = 46;
+            this.checkBox25.Text = "smartlogger";
+            this.checkBox25.UseVisualStyleBackColor = true;
+            // 
             // checkBox24
             // 
             this.checkBox24.AutoSize = true;
@@ -475,7 +489,7 @@ namespace JQ自動生成器_v1
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(238, 186);
+            this.label8.Location = new System.Drawing.Point(238, 197);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(109, 16);
             this.label8.TabIndex = 42;
@@ -486,7 +500,7 @@ namespace JQ自動生成器_v1
             this.textBox7.BackColor = System.Drawing.SystemColors.Control;
             this.textBox7.Enabled = false;
             this.textBox7.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox7.Location = new System.Drawing.Point(241, 205);
+            this.textBox7.Location = new System.Drawing.Point(241, 216);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(152, 23);
             this.textBox7.TabIndex = 43;
@@ -568,7 +582,7 @@ namespace JQ自動生成器_v1
             "高壓電錶",
             "低壓電錶",
             "獨立電錶"});
-            this.comboBox9.Location = new System.Drawing.Point(329, 144);
+            this.comboBox9.Location = new System.Drawing.Point(325, 170);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(71, 24);
             this.comboBox9.TabIndex = 35;
@@ -578,7 +592,7 @@ namespace JQ自動生成器_v1
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label28.Location = new System.Drawing.Point(238, 148);
+            this.label28.Location = new System.Drawing.Point(239, 173);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(85, 16);
             this.label28.TabIndex = 34;
@@ -1069,6 +1083,7 @@ namespace JQ自動生成器_v1
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.CheckBox checkBox24;
         private System.Windows.Forms.CheckBox checkBox23;
+        private System.Windows.Forms.CheckBox checkBox25;
     }
 }
 

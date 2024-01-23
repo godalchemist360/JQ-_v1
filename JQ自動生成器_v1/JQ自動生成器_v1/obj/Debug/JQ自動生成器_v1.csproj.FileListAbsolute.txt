@@ -45,7 +45,6 @@ C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianh
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\MOXA\jq生成器\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.exe
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\MOXA\jq生成器\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.pdb
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\C#\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.csproj.AssemblyReference.cache
-C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\C#\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.csproj.SuggestedBindingRedirects.cache
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\C#\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.csproj.ResolveComReference.cache
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\C#\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.Form1.resources
 C:\Users\ianhsieh\OneDrive - 進金生能源服務股份有限公司\桌面\ianhsieh\C#\JQ自動生成器_v1\JQ自動生成器_v1\JQ自動生成器_v1\obj\Debug\JQ自動生成器_v1.Properties.Resources.resources
